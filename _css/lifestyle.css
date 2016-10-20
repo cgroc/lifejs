@@ -1,0 +1,11 @@
+table, td {
+	border: 1px solid black;
+}
+
+td.dormant {
+	background-color: white;
+}
+
+td.active {
+	background-color: black;
+}
