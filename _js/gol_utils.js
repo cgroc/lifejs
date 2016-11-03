@@ -98,3 +98,4 @@ function Grid(size) {
 		return (((x - y) % size) + size) % size;
 	}
 }
+
