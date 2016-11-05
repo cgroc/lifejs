@@ -17,11 +17,20 @@ function Grid(size) {
 	})();
 	//get the value of an element
 	this.get = function(col, row) {
-		return this.gridArray[col][row];
+		return this.gridArray[row][col];
 	};
 	//set the value of an element
 	this.set = function(col, row, value) {
-		this.gridArray[col][row] = value;
+		this.gridArray[row][col] = value;
+	};
+	//toggle an element in the grid
+	this.toggle = function(col, row) {
+		if(this.get(col, row)) {
+			this.set(col, row, 0);
+		}
+		else {
+			this.set(col, row, 1);
+		}
 	};
 	//Get the next value of an element
 	//Return array of surrounding elements...

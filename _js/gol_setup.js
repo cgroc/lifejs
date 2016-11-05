@@ -5,19 +5,17 @@ $(function() {
 	};
 	
 	var gameGrid = new Grid(10);
-
+	console.log("Grid:");
+	console.log(gameGrid.toString());
 	//Add event handlers for table cells
 	$("td").click(function() {
-		//if($(this).hasClass("dormant")) {
-		//	$(this).removeClass("dormant");
-		//	$(this).addClass("active");
-		//}
-		//else if($(this).hasClass("active")) {
-		//	$(this).removeClass("active");
-		//	$(this).addClass("dormant");
-		//}
 		toggleDisplayCell(this);
-		console.log(getCol(this));
+		gameGrid.toggle(getCol(this), getRow(this));
+		console.log(gameGrid.toString());
+	});
+
+	$("#startButton").click(function() {
+		advance();
 	});
 
 	function getCol(elem) {
@@ -37,5 +35,27 @@ $(function() {
 			$(elem).removeClass("active");
 			$(elem).addClass("dormant");
 		}
+	}
+
+	function refreshDisplay(someGrid) {
+		for(var i = 0; i < someGrid.width; i++) {
+			//iterate through the columns
+			for(var j = 0; j < someGrid.height; j++) {
+				var cellID = "#" + i + "_" + j;
+				$(cellID).removeClass("active");
+				$(cellID).removeClass("dormant");
+				if(someGrid.get(i,j)) {
+					$(cellID).addClass("active");
+				}
+				else {
+					$(cellID).addClass("dormant");
+				}
+			}
+		}
+	}
+
+	function advance() {
+		gameGrid = gameGrid.getNext();
+		refreshDisplay(gameGrid);
 	}
 });
